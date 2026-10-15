@@ -38,7 +38,11 @@ class WAC {
 			$wacHeaders[] = "public=\"$publicGrants\"";
 		}
 		
-		$response = $response->withAddedHeader("Link", '<.acl>; rel="acl"');
+		// A container's ACL is <.acl>; a document's is <name.acl> beside it.
+		// Advertising <.acl> for a document points clients at the container's ACL.
+		$path = $uri->getPath();
+		$aclLink = substr($path, -1) === '/' ? '.acl' : rawurlencode(basename($path)) . '.acl';
+		$response = $response->withAddedHeader("Link", "<$aclLink>; rel=\"acl\"");
 		$response = $response->withHeader("WAC-Allow", implode(",", $wacHeaders));
 		$this->adapter->setFormat($currentFormat);
 		return $response;
