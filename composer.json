@@ -32,7 +32,9 @@
   "require-dev": {
     "ext-xdebug": "*",
     "ext-xml": "*",
-    "phpunit/phpunit": "^9"
+    "pdsinterop/flysystem-rdf": "^0.7",
+    "phpunit/phpunit": "^9",
+    "sweetrdf/easyrdf": ">=1.15.0 <1.16.0"
   },
   "scripts": {
     "tests:example": "php -S localhost:8080 -t ./tests/ ./tests/example.php",
